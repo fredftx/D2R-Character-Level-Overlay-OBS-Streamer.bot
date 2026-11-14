@@ -85,6 +85,22 @@ Uma **subida de nível** conta quando a barra de XP cai 30 % ou mais e continua 
 
 Abra a tela do personagem (**C**) uma vez no jogo: o nível é lido dela. Daí em diante as subidas são contadas sozinhas (e corrigidas sempre que você abre a tela do personagem de novo). Ou digite `!level 62` no chat.
 
+## As texturas do próprio jogo (opcional)
+
+Os estilos Diablo II já parecem o jogo, desenhados em código. Eles também podem usar a **arte do
+próprio jogo** — a moldura gravada das janelas, a pedra, a caixa com moldura dourada, a barra de XP
+de verdade com as pontas de ferro e os globos de vida e mana — feita a partir dos **seus próprios
+prints**:
+
+```
+python tools/make_textures.py --character painel.png --gold ouro.png --hud-low baixa.png --hud-high alta.png --screen jogo.png
+```
+
+O script explica cada imagem de que precisa (`--help`). Ele grava tudo em `overlay/textures/`, e o
+overlay usa as texturas quando elas estão lá. **Elas são arte da Blizzard, então não fazem parte
+deste repositório** (`overlay/textures/` é ignorada pelo git): cada streamer faz as suas a partir do
+próprio jogo, para a própria live.
+
 ## Comando de chat
 
 `!level 62` define o nível; `!level +` / `!level -` somam ou tiram um. Só o dono do canal e moderadores (Twitch).

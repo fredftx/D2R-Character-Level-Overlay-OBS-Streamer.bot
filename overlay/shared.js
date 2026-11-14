@@ -24,6 +24,7 @@
     accent: "bfa468", text: "efe6d2", number: "f3ead6", fill1: "fff3c4", fill2: "8a7038", track: "0b0b0c", glow: "ffd678",
     fontLabel: "Cinzel", fontNumber: "Grenze Gotisch", fontText: "Barlow Semi Condensed",
     panel: "0", panelStyle: "flat", panelColor: "141416", panelAlpha: "0.85", radius: "4",
+    textures: "0", orbTex: "life", orbTint: "",
     pct: "1", next: "0", icon: "1", shadow: "1", anim: "1", hide: "1",
     labelLevel: "", labelXp: "", labelUp: "",
     host: "127.0.0.1", port: "8080", pass: "", action: "D2R Level", event: "d2r_level",
@@ -31,15 +32,17 @@
 
   // Diablo II look: metal XP bar like the game's, stone panel, small caps like the game's
   // titles, and the item-quality colors (unique gold, set green, magic blue, rare yellow).
-  const D2 = { frame: "d2", bar: "segments", panel: "1", panelStyle: "stone", caps: "small", track: "0b0a09",
+  // textures=1: use the game's own art from overlay/textures/ when the streamer made it with
+  // tools/make_textures.py (not shipped); without it, the look drawn in code.
+  const D2 = { frame: "d2", bar: "segments", panel: "1", panelStyle: "stone", caps: "small", track: "0b0a09", textures: "1",
                fontLabel: "Cinzel", fontNumber: "Cinzel", fontText: "Cinzel", number: "ffffff", text: "d8d0bc" };
   const PRESETS = {
-    unique:    Object.assign({ title: "Diablo II - Unique (gold)", accent: "c7b377", fill1: "fff2c2", fill2: "b8862c", glow: "ffd77a" }, D2),
-    set:       Object.assign({ title: "Diablo II - Set (green)", accent: "2ecc40", fill1: "c8ffc0", fill2: "1b8a1b", glow: "6dff6d" }, D2),
-    magic:     Object.assign({ title: "Diablo II - Magic (blue)", accent: "8080ff", fill1: "d6d6ff", fill2: "3a3ad0", glow: "8f8fff" }, D2),
-    rare:      Object.assign({ title: "Diablo II - Rare (yellow)", accent: "ffff64", fill1: "ffffd0", fill2: "b8a800", glow: "ffff80" }, D2),
+    unique:    Object.assign({ title: "Diablo II - Unique (gold)", accent: "c7b377", fill1: "fff2c2", fill2: "b8862c", glow: "ffd77a", orbTint: "gold" }, D2),
+    set:       Object.assign({ title: "Diablo II - Set (green)", accent: "2ecc40", fill1: "c8ffc0", fill2: "1b8a1b", glow: "6dff6d", orbTint: "green" }, D2),
+    magic:     Object.assign({ title: "Diablo II - Magic (blue)", accent: "8080ff", fill1: "d6d6ff", fill2: "3a3ad0", glow: "8f8fff", orbTex: "mana" }, D2),
+    rare:      Object.assign({ title: "Diablo II - Rare (yellow)", accent: "ffff64", fill1: "ffffd0", fill2: "b8a800", glow: "ffff80", orbTint: "yellow" }, D2),
     life:      Object.assign({ title: "Diablo II - Life orb", layout: "orb", accent: "c7b377", fill1: "ff5a4a", fill2: "5a0000", glow: "ff3a2a" }, D2),
-    mana:      Object.assign({ title: "Diablo II - Mana orb", layout: "orb", accent: "c7b377", fill1: "5a7aff", fill2: "000a5a", glow: "4a6aff" }, D2),
+    mana:      Object.assign({ title: "Diablo II - Mana orb", layout: "orb", accent: "c7b377", fill1: "5a7aff", fill2: "000a5a", glow: "4a6aff", orbTex: "mana" }, D2),
     sanctuary: { title: "Sanctuary (gold)" },
     blood:     { title: "Blood", accent: "c2373f", text: "f1dede", number: "ffffff", fill1: "ff8a8a", fill2: "7a0d16", glow: "ff4a4a",
                  fontLabel: "Cinzel", fontNumber: "Pirata One" },

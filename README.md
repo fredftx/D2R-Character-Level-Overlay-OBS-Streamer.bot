@@ -85,6 +85,21 @@ A **level up** is counted when the XP bar drops by 30 % or more and stays down o
 
 Open the character screen (**C**) once in game: the level is read from it. From then on level ups are counted automatically (and corrected whenever you open the character screen again). Or type `!level 62` in chat.
 
+## The game's own textures (optional)
+
+The Diablo II presets look like the game out of the box, drawn in code. They can also use the
+**game's own art** — the engraved window frame, the stone, the gold-trimmed box, the real XP bar
+with its iron spikes and the real life and mana globes — made from **your own screenshots**:
+
+```
+python tools/make_textures.py --character panel.png --gold gold.png --hud-low low.png --hud-high high.png --screen game.png
+```
+
+The script explains each picture it needs (`--help`). It writes them into `overlay/textures/`,
+and the overlay uses them when they are there. **They are Blizzard's art, so they are not part of
+this repository** (`overlay/textures/` is ignored by git): each streamer makes them from their own
+game, for their own stream.
+
 ## Chat command
 
 `!level 62` sets the level, `!level +` / `!level -` add or subtract one. Broadcaster and moderators only (Twitch).
