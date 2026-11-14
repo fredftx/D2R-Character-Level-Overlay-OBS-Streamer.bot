@@ -1,0 +1,138 @@
+{
+ "ex_144559": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 1,
+  "level": 59,
+  "note": "character screen open, New Skill button"
+ },
+ "ex_144600": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 1,
+  "level": 59,
+  "note": "character screen open, New Skill button"
+ },
+ "ex_144935": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 0,
+  "level": 59,
+  "note": "character screen open"
+ },
+ "ex_145048": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 0,
+  "level": 59,
+  "note": "character screen open"
+ },
+ "ex_145610": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 1,
+  "level": 60,
+  "note": "character screen hides New Stats; New Skill visible"
+ },
+ "ex_145700": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 0,
+  "level": 60,
+  "note": "character screen + skill tree: no button visible"
+ },
+ "ex_145909": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 0,
+  "level": 60,
+  "note": "a 0 in the middle of the XP numbers"
+ },
+ "ex_144513": {
+  "hud": 1,
+  "xp": 1.0,
+  "newStats": 1,
+  "newSkill": 1,
+  "level": -1,
+  "note": "level-up moment: full glowing bar, fire behind New Skill"
+ },
+ "ex_145552": {
+  "hud": 1,
+  "xp": 1.0,
+  "newStats": 1,
+  "newSkill": 1,
+  "level": -1,
+  "note": "level-up moment: full glowing bar, fire behind New Stats"
+ },
+ "ex_144526": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 1,
+  "newSkill": 1,
+  "level": -1,
+  "note": "both buttons"
+ },
+ "ex_144556": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 1,
+  "newSkill": 1,
+  "level": -1,
+  "note": "both buttons, dark background"
+ },
+ "ex_144334": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 0,
+  "level": -1,
+  "note": "fire, no buttons"
+ },
+ "ex_144453": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 0,
+  "level": -1,
+  "note": "fire, no buttons"
+ },
+ "ex_144704": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 0,
+  "level": -1,
+  "note": "stash open"
+ },
+ "ex_144931": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 0,
+  "level": -1,
+  "note": "bright desert of act 2"
+ },
+ "ex_144131": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 0,
+  "level": -1,
+  "note": "waypoint panel (same frame, other window)"
+ },
+ "ex_144713": {
+  "hud": 0,
+  "xp": null,
+  "newStats": null,
+  "newSkill": null,
+  "level": -1,
+  "note": "vendor panel; belt open on top of the XP bar"
+ }
+}

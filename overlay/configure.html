@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D2R Level Overlay - configure</title>
+<style>
+  :root { --bg: #111114; --card: #1a1a1f; --line: #2c2c34; --text: #e9e6df; --muted: #9a958b; --gold: #c9ad6e; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.4 system-ui, "Segoe UI", sans-serif; }
+  header { padding: 16px 20px; border-bottom: 1px solid var(--line); display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  header h1 { margin: 0; font-size: 18px; font-weight: 650; }
+  header span { color: var(--muted); }
+  main { display: grid; grid-template-columns: minmax(300px, 420px) 1fr; gap: 0; min-height: calc(100vh - 58px); }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  form { padding: 14px 20px 40px; border-right: 1px solid var(--line); overflow: auto; }
+  fieldset { border: 1px solid var(--line); border-radius: 8px; margin: 0 0 14px; padding: 10px 12px 12px; background: var(--card); }
+  legend { color: var(--gold); font-weight: 600; padding: 0 6px; }
+  label { display: grid; grid-template-columns: 130px 1fr; align-items: center; gap: 8px; margin: 6px 0; }
+  label.check { grid-template-columns: 18px 1fr; }
+  input[type=text], input[type=password], input[type=number], select { width: 100%; background: #0f0f12; color: var(--text); border: 1px solid var(--line);
+    border-radius: 6px; padding: 6px 8px; font: inherit; }
+  input[type=color] { width: 54px; height: 28px; border: 1px solid var(--line); border-radius: 6px; background: #0f0f12; padding: 2px; }
+  input[type=range] { width: 100%; }
+  .colors { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 14px; }
+  .colors label { grid-template-columns: 1fr 54px; }
+  .hint { color: var(--muted); font-size: 12px; margin: 4px 0 0; }
+  section.preview { padding: 18px 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  form { min-width: 0; }
+  .stage { border-radius: 10px; border: 1px solid var(--line); padding: 28px; min-height: 220px; display: flex; align-items: center; justify-content: center; }
+  .stage.dark { background: radial-gradient(ellipse at 30% 40%, #3a2a24, #160f10 70%); }
+  .stage.bright { background: linear-gradient(135deg, #b7a27a, #6d5a3b); }
+  .stage.green { background: #00b140; }
+  .stage iframe { border: 0; background: transparent; width: 100%; height: auto; display: block; }
+  .bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  button { background: #2a2620; color: var(--text); border: 1px solid #4a4130; border-radius: 6px; padding: 7px 12px; font: inherit; cursor: pointer; }
+  button:hover { border-color: var(--gold); }
+  button.primary { background: var(--gold); color: #17140d; border-color: var(--gold); font-weight: 650; }
+  textarea { width: 100%; min-height: 76px; background: #0f0f12; color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 10px;
+    font: 12px/1.4 ui-monospace, Consolas, monospace; resize: vertical; }
+  table { border-collapse: collapse; }
+  td, th { padding: 4px 12px 4px 0; text-align: left; }
+  th { color: var(--muted); font-weight: 500; }
+  .ok { color: #8fd18f; }
+</style>
+</head>
+<body>
+<header>
+  <h1>D2R Level Overlay</h1>
+  <span>Pick a look, then copy the address into an OBS browser source.</span>
+</header>
+<main>
+  <form id="f" autocomplete="off">
+    <fieldset>
+      <legend>Look</legend>
+      <label>Preset <select name="preset"></select></label>
+      <label>Layout <select name="layout"></select></label>
+      <label>XP bar <select name="bar"><option value="segments">10 segments (like the game)</option><option value="solid">solid</option><option value="none">no bar</option></select></label>
+      <label>Language <select name="lang"></select></label>
+      <label>Align in the source <select name="align"><option value="left">left</option><option value="center">center</option><option value="right">right</option></select></label>
+    </fieldset>
+    <fieldset>
+      <legend>Colors</legend>
+      <div class="colors">
+        <label>Labels / frame <input type="color" name="accent"></label>
+        <label>Text <input type="color" name="text"></label>
+        <label>Level number <input type="color" name="number"></label>
+        <label>Glow <input type="color" name="glow"></label>
+        <label>Bar (top) <input type="color" name="fill1"></label>
+        <label>Bar (bottom) <input type="color" name="fill2"></label>
+        <label>Bar background <input type="color" name="track"></label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Fonts</legend>
+      <label>Labels <input type="text" name="fontLabel" list="fonts"></label>
+      <label>Level number <input type="text" name="fontNumber" list="fonts"></label>
+      <label>Other text <input type="text" name="fontText" list="fonts"></label>
+      <datalist id="fonts"></datalist>
+      <p class="hint">Any family from fonts.google.com works: type its name.</p>
+    </fieldset>
+    <fieldset>
+      <legend>Panel and details</legend>
+      <label class="check"><input type="checkbox" name="panel"> background panel</label>
+      <div class="colors">
+        <label>Panel color <input type="color" name="panelColor"></label>
+      </div>
+      <label>Panel opacity <input type="range" name="panelAlpha" min="0" max="1" step="0.05"></label>
+      <label>Corner radius <input type="range" name="radius" min="0" max="24" step="1"></label>
+      <label class="check"><input type="checkbox" name="pct"> show XP percentage</label>
+      <label class="check"><input type="checkbox" name="next"> show "to next level"</label>
+      <label class="check"><input type="checkbox" name="icon"> show the icon</label>
+      <label class="check"><input type="checkbox" name="shadow"> text shadow (helps over bright games)</label>
+      <label class="check"><input type="checkbox" name="anim"> level-up animation</label>
+      <label class="check"><input type="checkbox" name="hide"> hide while the game is closed</label>
+    </fieldset>
+    <fieldset>
+      <legend>Your own words (optional)</legend>
+      <label>"Level" <input type="text" name="labelLevel" placeholder="from the language"></label>
+      <label>"Experience" <input type="text" name="labelXp" placeholder="from the language"></label>
+      <label>"Level up!" <input type="text" name="labelUp" placeholder="from the language"></label>
+    </fieldset>
+    <fieldset>
+      <legend>Streamer.bot connection</legend>
+      <label>Host <input type="text" name="host"></label>
+      <label>Port <input type="number" name="port" min="1" max="65535"></label>
+      <label>Password <input type="password" name="pass" placeholder="only if you enabled one"></label>
+      <p class="hint">Streamer.bot &rarr; Servers/Clients &rarr; WebSocket Server. The password, if any, goes into the address below:
+        keep that address to yourself.</p>
+    </fieldset>
+  </form>
+
+  <section class="preview">
+    <div class="bar">
+      <button type="button" id="up" class="primary">Test a level up</button>
+      <label style="display:flex;gap:8px;margin:0">Level <input type="number" id="lv" value="61" min="1" max="99" style="width:70px"></label>
+      <label style="display:flex;gap:8px;margin:0;min-width:240px">XP <input type="range" id="xp" min="0" max="1" step="0.01" value="0.62"></label>
+      <select id="bg" style="width:auto"><option value="dark">dark background</option><option value="bright">bright background</option><option value="green">green screen</option></select>
+    </div>
+    <div class="stage dark" id="stage"><iframe id="pv" title="preview"></iframe></div>
+
+    <div>
+      <div class="bar" style="justify-content:space-between">
+        <strong>Browser source address</strong>
+        <button type="button" id="copy" class="primary">Copy</button>
+      </div>
+      <textarea id="url" readonly></textarea>
+      <p class="hint">OBS &rarr; add a <b>Browser</b> source &rarr; leave "Local file" <b>unchecked</b> &rarr; paste this into URL &rarr; set the size below.
+        You can resize it freely later: the overlay keeps its proportions.</p>
+    </div>
+    <div>
+      <strong>Suggested source size</strong>
+      <table id="sizes"></table>
+    </div>
+  </section>
+</main>
+
+<script src="shared.js"></script>
+<script>
+  const f = document.getElementById("f");
+  const pv = document.getElementById("pv");
+  const KEY = "d2rl-config";
+  const fill = (sel, entries) => { for (const [v, t] of entries) sel.add(new Option(t, v)); };
+  fill(f.preset, Object.entries(D2RL.PRESETS).map(([k, p]) => [k, p.title]));
+  fill(f.layout, Object.entries(D2RL.LAYOUTS).map(([k, l]) => [k, l.title]));
+  fill(f.lang, Object.entries(D2RL.LANGS).map(([k, l]) => [k, l.name]));
+  document.getElementById("fonts").innerHTML = D2RL.FONTS.map((x) => `<option value="${x}">`).join("");
+
+  const isColor = (el) => el.type === "color";
+  const isCheck = (el) => el.type === "checkbox";
+
+  function put(o) {
+    for (const el of f.elements) {
+      if (!el.name || !(el.name in o)) continue;
+      if (isColor(el)) el.value = "#" + o[el.name];
+      else if (isCheck(el)) el.checked = o[el.name] === "1";
+      else el.value = o[el.name];
+    }
+  }
+  function get() {
+    const o = { preset: f.preset.value };
+    for (const el of f.elements) {
+      if (!el.name || el.name === "preset") continue;
+      o[el.name] = isColor(el) ? el.value.slice(1) : isCheck(el) ? (el.checked ? "1" : "0") : el.value.trim();
+    }
+    return o;
+  }
+
+  const here = location.href.replace(/[?#].*$/, "").replace(/configure\.html$/, "");
+  let lastLayout = null;
+  function update() {
+    const o = get();
+    const q = D2RL.query(o);
+    const url = here + "index.html" + (q ? "?" + q : "");
+    document.getElementById("url").value = url;
+    const L = D2RL.LAYOUTS[o.layout];
+    const src = url + (q ? "&" : "?") + "preview=1";
+    if (pv.dataset.src !== src) {
+      pv.dataset.src = src;
+      pv.style.maxWidth = L.w + "px"; pv.style.aspectRatio = L.w + " / " + L.h;
+      pv.src = src;
+    }
+    document.getElementById("sizes").innerHTML = "<tr><th>OBS canvas</th><th>width</th><th>height</th></tr>" +
+      [["1920 × 1080", 0.75], ["2560 × 1440", 1], ["3840 × 2160", 1.5]]
+        .map(([c, k]) => `<tr><td>${c}</td><td>${Math.round(L.w * k)}</td><td>${Math.round(L.h * k)}</td></tr>`).join("");
+    try { localStorage.setItem(KEY, JSON.stringify(o)); } catch {}
+  }
+  function send(levelUp) {
+    pv.contentWindow && pv.contentWindow.postMessage({ d2rl: { level: +document.getElementById("lv").value, xp: +document.getElementById("xp").value,
+      levelUp, running: true } }, "*");
+  }
+  pv.addEventListener("load", () => setTimeout(() => send(false), 300));
+
+  f.preset.addEventListener("change", () => {
+    const keep = get();
+    const o = D2RL.options(new URLSearchParams("preset=" + f.preset.value));
+    for (const k of ["lang", "layout", "align", "host", "port", "pass", "labelLevel", "labelXp", "labelUp", "hide", "anim", "pct", "next"]) o[k] = keep[k];
+    put(o); update();
+  });
+  f.addEventListener("input", (e) => { if (e.target.name !== "preset") update(); });
+  f.addEventListener("change", (e) => { if (e.target.name !== "preset") update(); });
+  document.getElementById("xp").addEventListener("input", () => send(false));
+  document.getElementById("lv").addEventListener("change", () => send(false));
+  document.getElementById("up").addEventListener("click", () => {
+    const lv = document.getElementById("lv"); lv.value = Math.min(99, +lv.value + 1);
+    document.getElementById("xp").value = 0.04; send(true);
+  });
+  document.getElementById("bg").addEventListener("change", (e) => { document.getElementById("stage").className = "stage " + e.target.value; });
+  document.getElementById("copy").addEventListener("click", async () => {
+    const t = document.getElementById("url"), b = document.getElementById("copy");
+    try { await navigator.clipboard.writeText(t.value); } catch { t.select(); document.execCommand("copy"); }
+    b.textContent = "Copied"; setTimeout(() => (b.textContent = "Copy"), 1500);
+  });
+
+  let saved = null;
+  try { saved = JSON.parse(localStorage.getItem(KEY) || "null"); } catch {}
+  const start = D2RL.options(new URLSearchParams(saved ? D2RL.query(saved) : ""));
+  put(start);
+  update();
+</script>
+</body>
+</html>

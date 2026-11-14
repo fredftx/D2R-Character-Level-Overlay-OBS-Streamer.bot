@@ -1,0 +1,5 @@
+# local samples recorded with tools/record_samples.py (big; only curated fixtures go into the repo)
+samples/
+__pycache__/
+*.pyc
+build/

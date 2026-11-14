@@ -1,0 +1,90 @@
+{
+ "ex_16362508": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 0,
+  "level": 62,
+  "note": "character screen open (147,431,878 of 153,863,570)"
+ },
+ "ex_16432187": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 0,
+  "level": 62,
+  "note": "character screen open, bar almost full"
+ },
+ "ex_16445746": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 1,
+  "newSkill": 1,
+  "level": 63,
+  "note": "character screen just after the level up, both buttons"
+ },
+ "ex_16475003": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 0,
+  "level": 63,
+  "note": "character screen open (156,443,120 of 168,121,381)"
+ },
+ "ex_16442692": {
+  "hud": 1,
+  "xp": 1.0,
+  "newStats": 1,
+  "newSkill": 1,
+  "level": -1,
+  "note": "level-up moment: full glowing bar"
+ },
+ "ex_16442792": {
+  "hud": 1,
+  "xp": 0.0,
+  "newStats": 1,
+  "newSkill": 1,
+  "level": -1,
+  "note": "one second later: bar back to zero, both buttons"
+ },
+ "ex_16450096": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 1,
+  "level": -1,
+  "note": "stat points spent: only New Skill"
+ },
+ "ex_16370965": {
+  "hud": 0,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 0,
+  "level": -1,
+  "note": "loading screen (black)"
+ },
+ "ex_16493961": {
+  "hud": 0,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 0,
+  "level": -1,
+  "note": "belt open on top of the XP bar"
+ },
+ "ex_16364561": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 0,
+  "level": -1,
+  "note": "playing, no buttons"
+ },
+ "ex_16493760": {
+  "hud": 1,
+  "xp": null,
+  "newStats": 0,
+  "newSkill": 0,
+  "level": -1,
+  "note": "playing, no buttons"
+ }
+}

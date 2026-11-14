@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>D2R Level Overlay - gallery</title>
+<!-- Every preset in every layout, in demo mode (used for the README pictures). -->
+<style>
+  body { margin: 0; padding: 18px; background: #0b0b0d; color: #ddd; font: 14px system-ui, sans-serif; }
+  h2 { margin: 18px 0 8px; font-weight: 600; font-size: 15px; color: #aaa; }
+  .row { display: flex; flex-wrap: wrap; gap: 14px; }
+  .cell { background: radial-gradient(ellipse at 30% 40%, #3a2a24, #160f10 70%); padding: 10px; border-radius: 6px; }
+  .cell p { margin: 0 0 6px; font-size: 12px; color: #999; }
+  iframe { border: 0; display: block; background: transparent; }
+</style>
+</head>
+<body>
+<div id="out"></div>
+<script src="../overlay/shared.js"></script>
+<script>
+  const out = document.getElementById("out");
+  const only = new URLSearchParams(location.search);
+  const presets = only.get("preset") ? [only.get("preset")] : Object.keys(D2RL.PRESETS);
+  const layouts = only.get("layout") ? [only.get("layout")] : Object.keys(D2RL.LAYOUTS);
+  const extra = only.get("extra") || "";
+  for (const p of presets) {
+    const h = document.createElement("h2"); h.textContent = D2RL.PRESETS[p].title; out.appendChild(h);
+    const row = document.createElement("div"); row.className = "row"; out.appendChild(row);
+    for (const l of layouts) {
+      const L = D2RL.LAYOUTS[l];
+      const c = document.createElement("div"); c.className = "cell";
+      c.innerHTML = `<p>${L.title}</p><iframe width="${L.w / 2}" height="${L.h / 2}" src="../overlay/index.html?demo=1&preset=${p}&layout=${l}&next=1&${extra}"></iframe>`;
+      row.appendChild(c);
+    }
+  }
+</script>
+</body>
+</html>
