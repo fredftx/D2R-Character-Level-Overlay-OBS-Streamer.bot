@@ -246,9 +246,10 @@
         let m; try { m = JSON.parse(e.data); } catch { return; }
         if (m.request === "Hello") {
           clearTimeout(helloTimer);
+          // Streamer.bot 1.0.7 sends a salt and challenge in every Hello, also when its server
+          // does not require a password: only authenticate when a password was given.
           const a = m.authentication;
-          if (a && a.challenge) {
-            if (!o.pass) { console.warn("D2R Level: Streamer.bot asks for a password; add &pass=... to the URL"); return; }
+          if (a && a.challenge && o.pass) {
             const secret = await sha256b64(o.pass + a.salt);
             send({ request: "Authenticate", id: "d2rl-auth", authentication: await sha256b64(secret + a.challenge) });
             return;
@@ -256,6 +257,8 @@
           return start();
         }
         if (m.id === "d2rl-auth") { if (m.status === "ok") start(); else console.warn("D2R Level: wrong Streamer.bot password"); return; }
+        if (m.id === "d2rl-sub" && m.status && m.status !== "ok")
+          console.warn("D2R Level: Streamer.bot refused the subscription (" + (m.error || m.status) + ") - if its server requires a password, add &pass=... to the address");
         const d = m.data && (m.data[o.event] || (m.data.data && m.data.data[o.event]));
         if (d) paint(d);
       };
