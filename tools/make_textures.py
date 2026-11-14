@@ -9,9 +9,9 @@ e.g. at another resolution. Without textures, the Diablo II presets use the look
 Inputs:
   --character  the character screen (C), cropped to the panel (~747 x 992 from a 1440p screen)
   --gold       the gold counter box at the bottom of the stash/vendor window (~768 x 141)
-  --hud-low    the XP-bar strip right after a level up (bar almost empty): a "_xp" sample of
-               tools/record_samples.py at 2560 x 1440 (origin 740,1300 on screen)
-  --hud-high   the same strip with the bar almost full, over a different background
+  --hud-low    the XP bar right after a level up (bar almost empty), at 2560 x 1440: a "_bottom"
+               sample of tools/record_samples.py, or a whole 2560 x 1440 screenshot
+  --hud-high   the same with the bar almost full, over a different background
   --screen     a whole game screenshot (any 16:9 size) with full life and mana globes
 
 Outputs (--out, default overlay/textures): stone.png, stone_dark.png, frame.png (9-slice, 34 px),
@@ -74,6 +74,19 @@ def box9(src, b, size=(64, 48), inner=None, edge_x=None):
     return out
 
 
+def hud_bar(path):
+    """The XP bar (screen x 765..1800, y 1306..1339 at 2560 x 1440) out of a sample or screenshot."""
+    a = np.asarray(Image.open(path).convert("RGB")).astype(int)
+    origins = {(2560, 1440): (0, 0),          # whole screenshot
+               (1584, 374): (488, 988),       # record_samples.py "_bottom" at 2560 x 1440
+               (1090, 50): (740, 1300)}       # older 1440p strip ("_xp")
+    h, w = a.shape[:2]
+    if (w, h) not in origins:
+        raise SystemExit(f"{path}: {w} x {h} is not a 2560 x 1440 screenshot nor a 1440p sample of record_samples.py")
+    ox, oy = origins[(w, h)]
+    return a[1306 - oy:1340 - oy, 765 - ox:1801 - ox]
+
+
 def globe(screen, cx, cy, r):
     """Circle of a globe (fractions of the screen), transparent outside."""
     W, H = screen.size
@@ -106,9 +119,8 @@ def main():
     g = gold.crop((250, 20, 504, 84))                # stone rim + thin gold trim + sunken inside
     box9(g, 14, size=(96, 64), inner=g.crop((175, 16, 235, 46)), edge_x=(170, 236)).save(out / "goldbox.png")
 
-    # HUD XP bar (2560 x 1440 samples, origin 740,1300): screen x 765..1800, y 1306..1339
-    lo = np.asarray(Image.open(args.hud_low).convert("RGB")).astype(int)[6:40, 25:1061]
-    hi = np.asarray(Image.open(args.hud_high).convert("RGB")).astype(int)[6:40, 25:1061]
+    # HUD XP bar: screen x 765..1800, y 1306..1339 at 2560 x 1440
+    lo, hi = hud_bar(args.hud_low), hud_bar(args.hud_high)
     h, w = lo.shape[:2]
     tx0, tx1, ty0, ty1 = 11, 1028, 16, 27            # the track (where the fill goes)
     seg = (tx1 - tx0 + 1) / 10.0

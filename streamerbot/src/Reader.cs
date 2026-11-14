@@ -293,6 +293,8 @@ public static class XpTable
 //   The buttons alone never count: they come back when a panel closes and when entering a game
 //   with unspent points. The character screen otherwise only corrects; showing exactly +1 up to
 //   60 s after a drop that had no sign counts as a (late) level up.
+//   Level 98 and 99 show the same number (the top of the table, 3,520,485,254): a 99 is never
+//   "corrected" to 98, and a level up from 98 with the character screen open gives 99.
 public sealed class Tracker
 {
     public const double DropMin = 0.30;
@@ -333,7 +335,8 @@ public sealed class Tracker
                 else if ((now - lastUp).TotalSeconds <= 20) why = how + ": ignored (leveled up less than 20 s ago)";
                 else if (panel || Level > 0)
                 {
-                    Level = panel ? r.PanelLevel : Level + 1;
+                    bool top = r.PanelNumber == XpTable.Exp[99];       // 98 or 99: the screen cannot tell
+                    Level = panel && !(top && Level == 98) ? r.PanelLevel : System.Math.Min(99, Level + 1);
                     lastUp = now;
                     why = how;
                     ev = "up";
@@ -352,10 +355,12 @@ public sealed class Tracker
 
     string Correct(Reading r, System.DateTime now, ref string why)
     {
-        if (r.PanelLevel <= 0 || r.PanelLevel == Level) return null;
-        bool late = Level > 0 && r.PanelLevel == Level + 1 && (now - unsignedDrop).TotalSeconds < 60;
-        why = "character screen: level " + r.PanelLevel + (Level > 0 ? " (was " + Level + ")" : "") + (late ? ", after the bar dropped" : "");
-        Level = r.PanelLevel;
+        int screen = r.PanelLevel;
+        if (screen == 98 && r.PanelNumber == XpTable.Exp[99] && Level == 99) screen = 99;   // same number at 98 and 99
+        if (screen <= 0 || screen == Level) return null;
+        bool late = Level > 0 && screen == Level + 1 && (now - unsignedDrop).TotalSeconds < 60;
+        why = "character screen: level " + screen + (Level > 0 ? " (was " + Level + ")" : "") + (late ? ", after the bar dropped" : "");
+        Level = screen;
         if (!late) return "corrected";
         lastUp = now;
         unsignedDrop = System.DateTime.MinValue;

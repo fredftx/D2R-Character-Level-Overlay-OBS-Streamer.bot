@@ -54,7 +54,7 @@ A **level up** is counted when the XP bar drops by 30 % or more and stays down o
 
 - Windows 10 or 11, with the game and Streamer.bot **on the same PC** (two-PC setups: run Streamer.bot on the gaming PC)
 - [Streamer.bot](https://streamer.bot) 1.0 or newer, with its WebSocket server enabled
-- OBS Studio (any version with Browser sources)
+- OBS Studio **31 or newer** (its browser source must understand modern CSS; OBS 30 and older draw the overlay wrong)
 - Diablo II: Resurrected in a **16:9** resolution, fullscreen or windowed, any monitor, with the default interface (not "Legacy graphics" for the interface, not "Low vision mode")
 
 | Game resolution | Status |

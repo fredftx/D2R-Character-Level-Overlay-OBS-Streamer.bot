@@ -66,6 +66,7 @@ public static class Test
             var c = s.Split(' ');
             var r = new Reading { Hud = c[1] == "1", Xp = double.Parse(c[2], System.Globalization.CultureInfo.InvariantCulture),
                                   NewStats = c[3] == "1", NewSkill = c[4] == "1", PanelLevel = int.Parse(c[5]) };
+            if (r.PanelLevel > 0) r.PanelNumber = c.Length > 6 ? long.Parse(c[6]) : XpTable.Exp[r.PanelLevel + 1];
             string why;
             var ev = t.Step(r, t0.AddSeconds(double.Parse(c[0], System.Globalization.CultureInfo.InvariantCulture)), out why);
             if (ev != null || why != null) System.Console.WriteLine("EV|" + c[0] + "|" + (ev ?? "-") + "|" + t.Level + "|" + why);
@@ -163,6 +164,14 @@ SEQUENCES = """
 1 0 0.00 1 1 -1
 2 1 0.00 1 1 -1
 3 1 0.01 1 1 -1
+# level_99_is_not_corrected_to_98 99
+0 1 0.50 0 0 98 3520485254
+1 1 0.50 0 0 98 3520485254
+# up_98_to_99_with_character_screen 98
+0 1 0.97 0 0 98 3520485254
+1 1 0.98 0 0 98 3520485254
+2 1 0.00 0 0 98 3520485254
+3 1 0.00 0 0 98 3520485254
 # character_screen_corrects 58
 0 1 0.30 0 0 -1
 1 1 0.30 0 0 60
@@ -174,6 +183,7 @@ EVENTS = {
     "quick_character_switch": [], "death_in_hell": [], "no_sign_then_character_screen": [("-", 60), ("up", 61)],
     "level_unknown": [("-", -1), ("corrected", 61)], "two_level_ups": [("up", 31), ("up", 32)],
     "glow_frame": [("up", 61)],
+    "level_99_is_not_corrected_to_98": [], "up_98_to_99_with_character_screen": [("up", 99)],
     "hud_gone_for_a_second": [("up", 61)], "character_screen_corrects": [("corrected", 60)],
     "session_1920x1080": [("corrected", 62), ("up", 63), ("up", 64)],   # fixtures/sessions: a whole recorded session
 }

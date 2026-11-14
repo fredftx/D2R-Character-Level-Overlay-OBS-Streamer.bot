@@ -54,7 +54,7 @@ Uma **subida de nível** conta quando a barra de XP cai 30 % ou mais e continua 
 
 - Windows 10 ou 11, com o jogo e o Streamer.bot **no mesmo PC** (quem usa dois PCs: rode o Streamer.bot no PC do jogo)
 - [Streamer.bot](https://streamer.bot) 1.0 ou mais novo, com o servidor WebSocket ligado
-- OBS Studio (qualquer versão com fonte de navegador)
+- OBS Studio **31 ou mais novo** (a fonte de navegador precisa entender CSS moderno; o OBS 30 e anteriores desenham o overlay errado)
 - Diablo II: Resurrected numa resolução **16:9**, tela cheia ou janela, em qualquer monitor, com a interface padrão (sem "gráficos antigos" na interface e sem o "modo de baixa visão")
 
 | Resolução do jogo | Situação |

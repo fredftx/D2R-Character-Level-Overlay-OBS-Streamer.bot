@@ -85,6 +85,7 @@
       <legend>Panel and details</legend>
       <label class="check"><input type="checkbox" name="panel"> background panel</label>
       <label>Panel style <select name="panelStyle"><option value="flat">flat color</option><option value="stone">Diablo II stone, golden corners</option></select></label>
+      <label class="check"><input type="checkbox" name="textures"> the game's own textures (frame, stone, gold box, XP bar, globes)</label>
       <div class="colors">
         <label>Panel color <input type="color" name="panelColor"></label>
       </div>
@@ -186,7 +187,8 @@
     document.getElementById("sizes").innerHTML = "<tr><th>OBS canvas</th><th>width</th><th>height</th></tr>" +
       [["1920 × 1080", 0.75], ["2560 × 1440", 1], ["3840 × 2160", 1.5]]
         .map(([c, k]) => `<tr><td>${c}</td><td>${Math.round(L.w * k)}</td><td>${Math.round(L.h * k)}</td></tr>`).join("");
-    try { localStorage.setItem(KEY, JSON.stringify(o)); } catch {}
+    const keep = Object.assign({}, o); delete keep.pass;   // the password is not kept in the browser
+    try { localStorage.setItem(KEY, JSON.stringify(keep)); } catch {}
   }
   function send(levelUp) {
     pv.contentWindow && pv.contentWindow.postMessage({ d2rl: { level: +document.getElementById("lv").value, xp: +document.getElementById("xp").value,
