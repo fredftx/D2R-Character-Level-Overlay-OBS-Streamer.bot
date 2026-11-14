@@ -56,6 +56,8 @@
       <label>Preset <select name="preset"></select></label>
       <label>Layout <select name="layout"></select></label>
       <label>XP bar <select name="bar"><option value="segments">10 segments (like the game)</option><option value="solid">solid</option><option value="none">no bar</option></select></label>
+      <label>Bar frame <select name="frame"><option value="plain">plain</option><option value="d2">Diablo II (steel frame, iron spikes)</option></select></label>
+      <label>Label style <select name="caps"><option value="upper">CAPITALS, spaced</option><option value="small">Small caps (like the game)</option></select></label>
       <label>Language <select name="lang"></select></label>
       <label>Align in the source <select name="align"><option value="left">left</option><option value="center">center</option><option value="right">right</option></select></label>
     </fieldset>
@@ -82,6 +84,7 @@
     <fieldset>
       <legend>Panel and details</legend>
       <label class="check"><input type="checkbox" name="panel"> background panel</label>
+      <label>Panel style <select name="panelStyle"><option value="flat">flat color</option><option value="stone">Diablo II stone, golden corners</option></select></label>
       <div class="colors">
         <label>Panel color <input type="color" name="panelColor"></label>
       </div>
@@ -194,7 +197,9 @@
   f.preset.addEventListener("change", () => {
     const keep = get();
     const o = D2RL.options(new URLSearchParams("preset=" + f.preset.value));
-    for (const k of ["lang", "layout", "align", "host", "port", "pass", "labelLevel", "labelXp", "labelUp", "hide", "anim", "pct", "next"]) o[k] = keep[k];
+    const preset = D2RL.PRESETS[f.preset.value] || {};
+    for (const k of ["lang", "layout", "align", "host", "port", "pass", "labelLevel", "labelXp", "labelUp", "hide", "anim", "pct", "next"])
+      if (!(k in preset)) o[k] = keep[k];          // the orb presets bring their own layout
     put(o); update();
   });
   f.addEventListener("input", (e) => { if (e.target.name !== "preset") update(); });

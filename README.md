@@ -5,10 +5,13 @@ It reads the game *from the screen*, the same way OBS captures it — no memory 
 
 [Leia em português](README.pt-BR.md)
 
+![Diablo II presets: unique, set, magic, rare, life and mana orbs](docs/images/diablo2-presets.jpg)
+
 - Level and XP progress update every second while you play
 - Level-up animation (bar fills, bursts, the number jumps)
 - Works with any language of the game (it never reads words), at 16:9 resolutions
-- Fully customizable look: 4 layouts, 6 presets, colors, fonts (any Google Font), labels in 8 languages or your own words
+- A **Diablo II look** out of the box: the game's steel XP bar with its iron spikes, stone panels with golden corners, small caps like the game's titles, item-quality colors (unique, set, magic, rare) and a life/mana **orb**
+- Fully customizable: 5 layouts, 12 presets, colors, fonts (any Google Font), labels in 8 languages or your own words
 - A configurator page with live preview that gives you the address to paste into OBS
 - Fits any browser-source size, on any OBS canvas
 
@@ -92,14 +95,16 @@ Everything is in the configurator. For reference, the overlay address accepts:
 
 | Parameter | Values | |
 |---|---|---|
-| `preset` | `sanctuary` (default), `blood`, `frost`, `clean`, `neon`, `pixel` | starting point for the look |
-| `layout` | `classic`, `stacked`, `medallion`, `minimal` | |
-| `bar` | `segments`, `solid`, `none` | XP bar style |
+| `preset` | Diablo II: `unique` (default), `set`, `magic`, `rare`, `life`, `mana`; others: `sanctuary`, `blood`, `frost`, `clean`, `neon`, `pixel` | starting point for the look |
+| `layout` | `classic`, `stacked`, `medallion`, `orb`, `minimal` | |
+| `bar` | `segments`, `solid`, `none` | XP bar fill |
+| `frame` | `plain`, `d2` | XP bar frame (`d2`: steel frame with iron spikes, like the game) |
+| `caps` | `upper`, `small` | labels in spaced capitals or in small caps like the game |
 | `lang` | `en`, `pt-BR`, `es`, `fr`, `de`, `it`, `pl`, `ru` | label language |
 | `labelLevel`, `labelXp`, `labelUp` | any text | your own words |
 | `accent`, `text`, `number`, `glow`, `fill1`, `fill2`, `track` | hex color without `#` | |
 | `fontLabel`, `fontNumber`, `fontText` | any Google Fonts family | |
-| `panel`, `panelColor`, `panelAlpha`, `radius` | `0`/`1`, color, `0`–`1`, px | background panel |
+| `panel`, `panelStyle`, `panelColor`, `panelAlpha`, `radius` | `0`/`1`, `flat`/`stone`, color, `0`–`1`, px | background panel (`stone`: Diablo II stone with golden corners) |
 | `pct`, `next`, `icon`, `shadow`, `anim`, `hide` | `0`/`1` | percentage, "to next level", icon, text shadow, animation, hide while the game is closed |
 | `align` | `left`, `center`, `right` | position inside a wider source |
 | `host`, `port`, `pass` | | Streamer.bot WebSocket server (password only if you enabled one) |

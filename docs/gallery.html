@@ -19,16 +19,17 @@
 <script>
   const out = document.getElementById("out");
   const only = new URLSearchParams(location.search);
-  const presets = only.get("preset") ? [only.get("preset")] : Object.keys(D2RL.PRESETS);
-  const layouts = only.get("layout") ? [only.get("layout")] : Object.keys(D2RL.LAYOUTS);
+  const presets = only.get("preset") ? only.get("preset").split(",") : Object.keys(D2RL.PRESETS);
+  const layouts = only.get("layout") ? only.get("layout").split(",") : Object.keys(D2RL.LAYOUTS);
   const extra = only.get("extra") || "";
+  const k = parseFloat(only.get("scale") || "0.5");
   for (const p of presets) {
     const h = document.createElement("h2"); h.textContent = D2RL.PRESETS[p].title; out.appendChild(h);
     const row = document.createElement("div"); row.className = "row"; out.appendChild(row);
     for (const l of layouts) {
       const L = D2RL.LAYOUTS[l];
       const c = document.createElement("div"); c.className = "cell";
-      c.innerHTML = `<p>${L.title}</p><iframe width="${L.w / 2}" height="${L.h / 2}" src="../overlay/index.html?demo=1&preset=${p}&layout=${l}&next=1&${extra}"></iframe>`;
+      c.innerHTML = `<p>${L.title}</p><iframe width="${L.w * k}" height="${L.h * k}" src="../overlay/index.html?demo=1&preset=${p}&layout=${l}&next=1&${extra}"></iframe>`;
       row.appendChild(c);
     }
   }

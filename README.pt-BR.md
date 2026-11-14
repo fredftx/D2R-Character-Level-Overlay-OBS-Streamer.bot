@@ -5,10 +5,13 @@ Ele lê o jogo *pela tela*, do mesmo jeito que o OBS captura: não lê memória,
 
 [Read in English](README.md)
 
+![Estilos Diablo II: único, conjunto, mágico, raro e os orbes de vida e mana](docs/images/diablo2-presets.jpg)
+
 - Nível e progresso de XP atualizados a cada segundo enquanto você joga
 - Animação de subir de nível (a barra enche, estoura e o número salta)
 - Funciona com o jogo em qualquer idioma (ele nunca lê palavras), em resoluções 16:9
-- Visual todo configurável: 4 desenhos, 6 estilos prontos, cores, fontes (qualquer Google Font) e textos em 8 idiomas ou com as suas palavras
+- **Visual de Diablo II** pronto: a barra de XP de metal do jogo com as pontas de ferro, painéis de pedra com cantoneiras douradas, versalete como os títulos do jogo, as cores de raridade dos itens (único, conjunto, mágico, raro) e um **orbe** de vida/mana
+- Visual todo configurável: 5 desenhos, 12 estilos prontos, cores, fontes (qualquer Google Font) e textos em 8 idiomas ou com as suas palavras
 - Uma página de configuração com prévia ao vivo, que entrega o endereço para colar no OBS
 - Cabe em qualquer tamanho de fonte de navegador, em qualquer tela do OBS
 
@@ -92,14 +95,16 @@ Está tudo no configurador. Para referência, o endereço do overlay aceita:
 
 | Parâmetro | Valores | |
 |---|---|---|
-| `preset` | `sanctuary` (padrão), `blood`, `frost`, `clean`, `neon`, `pixel` | ponto de partida do visual |
-| `layout` | `classic`, `stacked`, `medallion`, `minimal` | |
-| `bar` | `segments`, `solid`, `none` | estilo da barra de XP |
+| `preset` | Diablo II: `unique` (padrão), `set`, `magic`, `rare`, `life`, `mana`; outros: `sanctuary`, `blood`, `frost`, `clean`, `neon`, `pixel` | ponto de partida do visual |
+| `layout` | `classic`, `stacked`, `medallion`, `orb`, `minimal` | |
+| `bar` | `segments`, `solid`, `none` | enchimento da barra de XP |
+| `frame` | `plain`, `d2` | moldura da barra (`d2`: metal com pontas de ferro, como no jogo) |
+| `caps` | `upper`, `small` | textos em maiúsculas espaçadas ou em versalete como no jogo |
 | `lang` | `en`, `pt-BR`, `es`, `fr`, `de`, `it`, `pl`, `ru` | idioma dos textos |
 | `labelLevel`, `labelXp`, `labelUp` | qualquer texto | as suas palavras |
 | `accent`, `text`, `number`, `glow`, `fill1`, `fill2`, `track` | cor em hex sem `#` | |
 | `fontLabel`, `fontNumber`, `fontText` | qualquer família do Google Fonts | |
-| `panel`, `panelColor`, `panelAlpha`, `radius` | `0`/`1`, cor, `0`–`1`, px | painel de fundo |
+| `panel`, `panelStyle`, `panelColor`, `panelAlpha`, `radius` | `0`/`1`, `flat`/`stone`, cor, `0`–`1`, px | painel de fundo (`stone`: pedra de Diablo II com cantoneiras douradas) |
 | `pct`, `next`, `icon`, `shadow`, `anim`, `hide` | `0`/`1` | porcentagem, "para o próximo nível", ícone, sombra do texto, animação, esconder com o jogo fechado |
 | `align` | `left`, `center`, `right` | posição dentro de uma fonte mais larga |
 | `host`, `port`, `pass` | | servidor WebSocket do Streamer.bot (senha só se você ligou uma) |

@@ -14,21 +14,32 @@
   };
 
   // Fonts offered by the configurator (all from Google Fonts; any other Google Font name works too).
-  const FONTS = ["Cinzel", "Cinzel Decorative", "Grenze Gotisch", "MedievalSharp", "Pirata One", "UnifrakturCook",
+  const FONTS = ["Cinzel", "Cinzel Decorative", "Marcellus SC", "Almendra SC", "Cormorant SC", "IM Fell English SC",
+    "Grenze Gotisch", "MedievalSharp", "Pirata One", "UnifrakturCook",
     "Barlow Semi Condensed", "Oswald", "Bebas Neue", "Rajdhani", "Teko", "Inter", "Roboto Condensed", "Montserrat",
     "Exo 2", "Orbitron", "Press Start 2P", "Silkscreen"];
 
   const DEFAULTS = {
-    lang: "en", layout: "classic", bar: "segments", align: "left",
+    lang: "en", layout: "classic", bar: "segments", frame: "plain", align: "left", caps: "upper",
     accent: "bfa468", text: "efe6d2", number: "f3ead6", fill1: "fff3c4", fill2: "8a7038", track: "0b0b0c", glow: "ffd678",
     fontLabel: "Cinzel", fontNumber: "Grenze Gotisch", fontText: "Barlow Semi Condensed",
-    panel: "0", panelColor: "141416", panelAlpha: "0.85", radius: "4",
+    panel: "0", panelStyle: "flat", panelColor: "141416", panelAlpha: "0.85", radius: "4",
     pct: "1", next: "0", icon: "1", shadow: "1", anim: "1", hide: "1",
     labelLevel: "", labelXp: "", labelUp: "",
     host: "127.0.0.1", port: "8080", pass: "", action: "D2R Level", event: "d2r_level",
   };
 
+  // Diablo II look: metal XP bar like the game's, stone panel, small caps like the game's
+  // titles, and the item-quality colors (unique gold, set green, magic blue, rare yellow).
+  const D2 = { frame: "d2", bar: "segments", panel: "1", panelStyle: "stone", caps: "small", track: "0b0a09",
+               fontLabel: "Cinzel", fontNumber: "Cinzel", fontText: "Cinzel", number: "ffffff", text: "d8d0bc" };
   const PRESETS = {
+    unique:    Object.assign({ title: "Diablo II - Unique (gold)", accent: "c7b377", fill1: "fff2c2", fill2: "b8862c", glow: "ffd77a" }, D2),
+    set:       Object.assign({ title: "Diablo II - Set (green)", accent: "2ecc40", fill1: "c8ffc0", fill2: "1b8a1b", glow: "6dff6d" }, D2),
+    magic:     Object.assign({ title: "Diablo II - Magic (blue)", accent: "8080ff", fill1: "d6d6ff", fill2: "3a3ad0", glow: "8f8fff" }, D2),
+    rare:      Object.assign({ title: "Diablo II - Rare (yellow)", accent: "ffff64", fill1: "ffffd0", fill2: "b8a800", glow: "ffff80" }, D2),
+    life:      Object.assign({ title: "Diablo II - Life orb", layout: "orb", accent: "c7b377", fill1: "ff5a4a", fill2: "5a0000", glow: "ff3a2a" }, D2),
+    mana:      Object.assign({ title: "Diablo II - Mana orb", layout: "orb", accent: "c7b377", fill1: "5a7aff", fill2: "000a5a", glow: "4a6aff" }, D2),
     sanctuary: { title: "Sanctuary (gold)" },
     blood:     { title: "Blood", accent: "c2373f", text: "f1dede", number: "ffffff", fill1: "ff8a8a", fill2: "7a0d16", glow: "ff4a4a",
                  fontLabel: "Cinzel", fontNumber: "Pirata One" },
@@ -42,18 +53,22 @@
                  glow: "f5d76e", fontLabel: "Press Start 2P", fontNumber: "Press Start 2P", fontText: "Silkscreen", bar: "segments" },
   };
 
+  const DEFAULT_PRESET = "unique";      // what the overlay looks like with no preset in the address
+
   const LAYOUTS = {
     classic:   { title: "Classic (icon, level, XP bar)", w: 664, h: 104 },
     stacked:   { title: "Stacked (level over the bar)", w: 664, h: 104 },
     medallion: { title: "Medallion (ring = XP)", w: 420, h: 104 },
+    orb:       { title: "Orb (like the life and mana globes)", w: 420, h: 104 },
     minimal:   { title: "Minimal (just the level)", w: 260, h: 104 },
   };
 
   // URLSearchParams -> full option object (preset, then explicit parameters)
   function options(params) {
-    const p = Object.assign({}, DEFAULTS, PRESETS[params.get("preset")] || {});
+    const preset = PRESETS[params.get("preset")] ? params.get("preset") : DEFAULT_PRESET;
+    const p = Object.assign({}, DEFAULTS, PRESETS[preset]);
     for (const k of Object.keys(DEFAULTS)) if (params.has(k)) p[k] = params.get(k);
-    p.preset = params.get("preset") || "sanctuary";
+    p.preset = preset;
     if (!LANGS[p.lang]) p.lang = "en";
     if (!LAYOUTS[p.layout]) p.layout = "classic";
     delete p.title;
@@ -64,10 +79,10 @@
   function query(o) {
     const base = Object.assign({}, DEFAULTS, PRESETS[o.preset] || {});
     const q = new URLSearchParams();
-    if (o.preset && o.preset !== "sanctuary") q.set("preset", o.preset);
+    if (o.preset && o.preset !== DEFAULT_PRESET) q.set("preset", o.preset);
     for (const k of Object.keys(DEFAULTS)) if (o[k] !== undefined && String(o[k]) !== String(base[k])) q.set(k, o[k]);
     return q.toString();
   }
 
-  window.D2RL = { LANGS, FONTS, DEFAULTS, PRESETS, LAYOUTS, options, query };
+  window.D2RL = { LANGS, FONTS, DEFAULTS, PRESETS, LAYOUTS, DEFAULT_PRESET, options, query };
 })();
