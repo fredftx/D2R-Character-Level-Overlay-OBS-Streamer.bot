@@ -2,10 +2,9 @@
 
     python tools/make_textures.py --character panel.png --gold gold.png --hud-low low.png --hud-high high.png --screen game.png
 
-The textures are pieces of Blizzard's game art. They are NOT shipped with this project: each
-streamer makes them from screenshots of their own game, and they stay on that PC
-(overlay/textures/ is ignored by git). Without them, the Diablo II presets use the look drawn in
-code; with them, the overlay uses the game's own stone, frames, XP bar and globes.
+The project ships textures made this way from screenshots at 2560 x 1440 (pieces of the game's
+interface, (c) Blizzard Entertainment). Run this to make them again from your own screenshots,
+e.g. at another resolution. Without textures, the Diablo II presets use the look drawn in code.
 
 Inputs:
   --character  the character screen (C), cropped to the panel (~747 x 992 from a 1440p screen)

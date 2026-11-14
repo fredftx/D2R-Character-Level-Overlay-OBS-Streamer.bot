@@ -32,8 +32,8 @@
 
   // Diablo II look: metal XP bar like the game's, stone panel, small caps like the game's
   // titles, and the item-quality colors (unique gold, set green, magic blue, rare yellow).
-  // textures=1: use the game's own art from overlay/textures/ when the streamer made it with
-  // tools/make_textures.py (not shipped); without it, the look drawn in code.
+  // textures=1: the game's own art from overlay/textures/ (shipped; tools/make_textures.py
+  // remakes it from your screenshots); textures=0 or no folder: the look drawn in code.
   const D2 = { frame: "d2", bar: "segments", panel: "1", panelStyle: "stone", caps: "small", track: "0b0a09", textures: "1",
                fontLabel: "Cinzel", fontNumber: "Cinzel", fontText: "Cinzel", number: "ffffff", text: "d8d0bc" };
   const PRESETS = {

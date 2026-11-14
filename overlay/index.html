@@ -109,7 +109,7 @@
   .orbl .label { font-size: 18px; }
   .orbl .pct { font-size: 22px; }
 
-  /* ---- the game's own art (overlay/textures/, made by tools/make_textures.py) ---- */
+  /* ---- the game's own art (overlay/textures/; tools/make_textures.py remakes it) ---- */
   .texbar { display: none; }
   .tex .badge.stone { background: url(textures/stone_dark.png) left top / auto 100% repeat-x; border: 14px solid transparent;
     border-image: url(textures/frame.png) 34 / 14px round; box-shadow: 0 4px 14px rgba(0,0,0,.65); border-radius: 0; }
@@ -250,7 +250,7 @@
   badge.classList.toggle("shadow", flag("shadow"));
   badge.classList.add("bar-" + (["segments", "solid", "none"].includes(o.bar) ? o.bar : "segments"));
   if (!flag("anim")) badge.classList.add("noanim");
-  // the game's own art, when the streamer made it (tools/make_textures.py); otherwise the drawn look
+  // the game's own art (overlay/textures/); if the folder is missing, the look drawn in code
   if (flag("textures")) {
     const probe = new Image();
     probe.onload = () => stage.classList.add("tex");

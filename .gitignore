@@ -3,5 +3,3 @@ samples/
 __pycache__/
 *.pyc
 build/
-# Diablo II textures made from your own screenshots (tools/make_textures.py): Blizzard art, not ours to publish
-overlay/textures/

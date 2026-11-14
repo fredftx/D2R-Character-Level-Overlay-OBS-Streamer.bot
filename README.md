@@ -85,20 +85,20 @@ A **level up** is counted when the XP bar drops by 30 % or more and stays down o
 
 Open the character screen (**C**) once in game: the level is read from it. From then on level ups are counted automatically (and corrected whenever you open the character screen again). Or type `!level 62` in chat.
 
-## The game's own textures (optional)
+## The game's own textures
 
-The Diablo II presets look like the game out of the box, drawn in code. They can also use the
-**game's own art** — the engraved window frame, the stone, the gold-trimmed box, the real XP bar
-with its iron spikes and the real life and mana globes — made from **your own screenshots**:
+The Diablo II presets use pieces of the **game's own interface** from `overlay/textures/`: the
+engraved window frame, the dark stone, the gold-trimmed box, the real HUD XP bar with its iron
+spikes and the life and mana globes. They were cut from screenshots of the game at 2560 × 1440.
+Add `textures=0` to the address for the same presets drawn in code instead.
+
+To make them again from your own screenshots (another resolution, or just to refresh them):
 
 ```
 python tools/make_textures.py --character panel.png --gold gold.png --hud-low low.png --hud-high high.png --screen game.png
 ```
 
-The script explains each picture it needs (`--help`). It writes them into `overlay/textures/`,
-and the overlay uses them when they are there. **They are Blizzard's art, so they are not part of
-this repository** (`overlay/textures/` is ignored by git): each streamer makes them from their own
-game, for their own stream.
+`--help` explains each picture it needs.
 
 ## Chat command
 
@@ -153,10 +153,11 @@ python streamerbot/tests/test_reader.py   # the real C# on recorded screens + th
 - `streamerbot/src/Action.cs` — the Streamer.bot action (screen copy, chat command, WebSocket broadcast)
 - `streamerbot/templates/` — the reference pictures (from a 2560 × 1440 screen)
 - `streamerbot/tests/fixtures/` — recorded screen pieces with the expected readings
-- `overlay/` — `index.html` (the overlay), `configure.html` (the configurator), `shared.js` (options, presets, languages)
+- `overlay/` — `index.html` (the overlay), `configure.html` (the configurator), `shared.js` (options, presets, languages), `textures/` (pieces of the game's interface)
+- `tools/` — `record_samples.py` (screen samples for calibration), `make_textures.py` (textures from your screenshots)
 
 The overlay listens to the Streamer.bot broadcast `{"d2r_level": {"level": 62, "xp": 0.35, "levelUp": false, "running": true}}`, so you can also build your own.
 
 ## License
 
-[MIT](LICENSE). Diablo and Diablo II: Resurrected are trademarks of Blizzard Entertainment, Inc. This is an unofficial fan project, not affiliated with or endorsed by Blizzard.
+[MIT](LICENSE) for the code. The textures in `overlay/textures/` and the screen pieces used as test fixtures (`streamerbot/templates/`, `streamerbot/tests/fixtures/`) come from Diablo II: Resurrected and are © Blizzard Entertainment, Inc.; they are not covered by the MIT license and are here only so this free, non-commercial fan tool can look and work like the game. Diablo and Diablo II: Resurrected are trademarks of Blizzard Entertainment, Inc. This is an unofficial fan project, not affiliated with or endorsed by Blizzard; any of this material will be removed on request.

@@ -85,21 +85,20 @@ Uma **subida de nível** conta quando a barra de XP cai 30 % ou mais e continua 
 
 Abra a tela do personagem (**C**) uma vez no jogo: o nível é lido dela. Daí em diante as subidas são contadas sozinhas (e corrigidas sempre que você abre a tela do personagem de novo). Ou digite `!level 62` no chat.
 
-## As texturas do próprio jogo (opcional)
+## As texturas do próprio jogo
 
-Os estilos Diablo II já parecem o jogo, desenhados em código. Eles também podem usar a **arte do
-próprio jogo** — a moldura gravada das janelas, a pedra, a caixa com moldura dourada, a barra de XP
-de verdade com as pontas de ferro e os globos de vida e mana — feita a partir dos **seus próprios
-prints**:
+Os estilos Diablo II usam pedaços da **interface do próprio jogo**, em `overlay/textures/`: a
+moldura gravada das janelas, a pedra escura, a caixa com moldura dourada, a barra de XP de verdade
+do HUD com as pontas de ferro e os globos de vida e mana. Eles foram recortados de prints do jogo
+em 2560 × 1440. Acrescente `textures=0` ao endereço para ter os mesmos estilos desenhados em código.
+
+Para refazer a partir dos seus próprios prints (outra resolução, ou só para atualizar):
 
 ```
 python tools/make_textures.py --character painel.png --gold ouro.png --hud-low baixa.png --hud-high alta.png --screen jogo.png
 ```
 
-O script explica cada imagem de que precisa (`--help`). Ele grava tudo em `overlay/textures/`, e o
-overlay usa as texturas quando elas estão lá. **Elas são arte da Blizzard, então não fazem parte
-deste repositório** (`overlay/textures/` é ignorada pelo git): cada streamer faz as suas a partir do
-próprio jogo, para a própria live.
+O `--help` explica cada imagem de que ele precisa.
 
 ## Comando de chat
 
@@ -154,4 +153,4 @@ Os detalhes estão no [README em inglês](README.md#for-developers).
 
 ## Licença
 
-[MIT](LICENSE). Diablo e Diablo II: Resurrected são marcas da Blizzard Entertainment, Inc. Este é um projeto de fã, não oficial, sem ligação nem aval da Blizzard.
+[MIT](LICENSE) para o código. As texturas de `overlay/textures/` e os pedaços de tela usados nos testes (`streamerbot/templates/`, `streamerbot/tests/fixtures/`) vêm do Diablo II: Resurrected e são © Blizzard Entertainment, Inc.; não estão sob a licença MIT e estão aqui só para que esta ferramenta de fã, gratuita e sem fins comerciais, se pareça e funcione como o jogo. Diablo e Diablo II: Resurrected são marcas da Blizzard Entertainment, Inc. Este é um projeto de fã, não oficial, sem ligação nem aval da Blizzard; qualquer parte deste material será retirada se pedirem.
