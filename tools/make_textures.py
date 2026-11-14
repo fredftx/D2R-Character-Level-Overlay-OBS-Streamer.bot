@@ -57,15 +57,17 @@ def nine_slice(src, corner_box, edge_h_box, edge_v_box, b, inner, size=160):
     return out
 
 
-def box9(src, b, size=(64, 48), inner=None):
+def box9(src, b, size=(64, 48), inner=None, edge_x=None):
     """9-slice source from a whole box image: its four corners and edges, `inner` (or the
-    box's own middle) inside."""
+    box's own middle) inside. edge_x = (x0, x1): take the top and bottom edges from there only
+    (a plain stretch, away from light spots near the corners)."""
     w, h = src.size
     W, H = size
+    ex0, ex1 = edge_x or (b, w - b)
     out = Image.new("RGBA", size)
     out.paste((inner or src.crop((b, b, w - b, h - b))).resize((W - 2 * b, H - 2 * b)), (b, b))
-    out.paste(src.crop((b, 0, w - b, b)).resize((W - 2 * b, b)), (b, 0))
-    out.paste(src.crop((b, h - b, w - b, h)).resize((W - 2 * b, b)), (b, H - b))
+    out.paste(src.crop((ex0, 0, ex1, b)).resize((W - 2 * b, b)), (b, 0))
+    out.paste(src.crop((ex0, h - b, ex1, h)).resize((W - 2 * b, b)), (b, H - b))
     out.paste(src.crop((0, b, b, h - b)).resize((b, H - 2 * b)), (0, b))
     out.paste(src.crop((w - b, b, w, h - b)).resize((b, H - 2 * b)), (W - b, b))
     for (sx, sy, dx, dy) in ((0, 0, 0, 0), (w - b, 0, W - b, 0), (0, h - b, 0, H - b), (w - b, h - b, W - b, H - b)):
@@ -103,7 +105,7 @@ def main():
     # sunken value box (an empty box of the right column) and the gold-trimmed box (without the coin)
     box9(char.crop((350, 362, 712, 412)), 8).save(out / "slot.png")
     g = gold.crop((250, 20, 504, 84))                # stone rim + thin gold trim + sunken inside
-    box9(g, 14, size=(96, 64), inner=g.crop((175, 16, 235, 46))).save(out / "goldbox.png")
+    box9(g, 14, size=(96, 64), inner=g.crop((175, 16, 235, 46)), edge_x=(170, 236)).save(out / "goldbox.png")
 
     # HUD XP bar (2560 x 1440 samples, origin 740,1300): screen x 765..1800, y 1306..1339
     lo = np.asarray(Image.open(args.hud_low).convert("RGB")).astype(int)[6:40, 25:1061]
