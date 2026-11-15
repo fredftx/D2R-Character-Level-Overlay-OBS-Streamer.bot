@@ -5,7 +5,7 @@ It reads the game *from the screen*, the same way OBS captures it — no memory 
 
 [Leia em português](README.pt-BR.md)
 
-**[⬇ Download the latest version](https://github.com/fredftx/D2R-Character-Level-Overlay-OBS-Streamer.bot/releases/latest)** (`D2R-Level-Overlay.zip`, under *Assets*) · [what's new](CHANGELOG.md)
+**[⬇ Download the latest version](https://github.com/fredftx/D2R-Character-Level-Overlay-OBS-Streamer.bot/releases/latest)** (`D2R-Level-Overlay.zip`, under *Assets*) · [what's new](CHANGELOG.md) · [☕ Support on Ko-fi](https://ko-fi.com/fredftx)
 
 ![Diablo II presets: unique, set, magic, rare, life and mana orbs](docs/images/diablo2-presets.jpg)
 
@@ -166,6 +166,10 @@ python tools/make_release.py              # checks and tests, then build/D2R-Lev
 - `tools/` — `record_samples.py` (screen samples for calibration), `make_textures.py` (textures from your screenshots), `make_release.py` (the release zip)
 
 The overlay listens to the Streamer.bot broadcast `{"d2r_level": {"level": 62, "xp": 0.35, "levelUp": false, "running": true}}`, so you can also build your own.
+
+## Support
+
+The overlay is free and open source. If it helped your stream, you can [buy me a coffee on Ko-fi](https://ko-fi.com/fredftx) ☕. Bug reports, ideas and samples of new setups help too.
 
 ## License
 

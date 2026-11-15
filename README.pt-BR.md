@@ -5,7 +5,7 @@ Ele lê o jogo *pela tela*, do mesmo jeito que o OBS captura: não lê memória,
 
 [Read in English](README.md)
 
-**[⬇ Baixe a versão mais nova](https://github.com/fredftx/D2R-Character-Level-Overlay-OBS-Streamer.bot/releases/latest)** (`D2R-Level-Overlay.zip`, em *Assets*) · [o que mudou](CHANGELOG.md)
+**[⬇ Baixe a versão mais nova](https://github.com/fredftx/D2R-Character-Level-Overlay-OBS-Streamer.bot/releases/latest)** (`D2R-Level-Overlay.zip`, em *Assets*) · [o que mudou](CHANGELOG.md) · [☕ Apoie no Ko-fi](https://ko-fi.com/fredftx)
 
 ![Estilos Diablo II: único, conjunto, mágico, raro e os orbes de vida e mana](docs/images/diablo2-presets.jpg)
 
@@ -159,6 +159,10 @@ python tools/make_release.py              # checagens e testes, depois build/D2R
 ```
 
 Os detalhes estão no [README em inglês](README.md#for-developers).
+
+## Apoie
+
+O overlay é gratuito e de código aberto. Se ele ajudou a sua live, você pode [me pagar um café no Ko-fi](https://ko-fi.com/fredftx) ☕. Relatar bugs, dar ideias e mandar amostras de novas configurações também ajuda.
 
 ## Licença
 
