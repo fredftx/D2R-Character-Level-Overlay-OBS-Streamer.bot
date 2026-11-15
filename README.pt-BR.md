@@ -5,6 +5,8 @@ Ele lê o jogo *pela tela*, do mesmo jeito que o OBS captura: não lê memória,
 
 [Read in English](README.md)
 
+**[⬇ Baixe a versão mais nova](https://github.com/fredftx/D2R-Character-Level-Overlay-OBS-Streamer.bot/releases/latest)** (`D2R-Level-Overlay.zip`, em *Assets*) · [o que mudou](CHANGELOG.md)
+
 ![Estilos Diablo II: único, conjunto, mágico, raro e os orbes de vida e mana](docs/images/diablo2-presets.jpg)
 
 - Nível e progresso de XP atualizados a cada segundo enquanto você joga
@@ -67,23 +69,29 @@ Uma **subida de nível** conta quando a barra de XP cai 30 % ou mais e continua 
 
 ## Instalação
 
+Baixe o **`D2R-Level-Overlay.zip`** da [versão mais nova](https://github.com/fredftx/D2R-Character-Level-Overlay-OBS-Streamer.bot/releases/latest) e extraia num lugar onde ele vai ficar, por exemplo em `Documentos` (ele cria a pasta `D2R-Level-Overlay`): o OBS carrega o overlay dessa pasta.
+
 ### 1. Streamer.bot
 
 1. **Servers/Clients → WebSocket Server**: ligue o *Auto Start* e inicie (endereço padrão `127.0.0.1`, porta `8080`).
-2. **Import** (no alto da janela): cole o conteúdo de [`streamerbot/D2R-Level-Overlay.sb`](streamerbot/D2R-Level-Overlay.sb) e importe.
+2. **Import** (no alto da janela): cole o conteúdo de [`streamerbot/D2R-Level-Overlay.sb`](streamerbot/D2R-Level-Overlay.sb) (abra com o Bloco de Notas) e importe.
    Entra uma ação, **D2R Level**, e um comando de chat, **!level**.
 3. **Commands**: o Streamer.bot importa comandos desligados. Ligue o **D2R Level !level** se quiser usá-lo.
 4. Reinicie o Streamer.bot uma vez (ou rode a ação uma vez): daí em diante o leitor liga junto com ele.
 
 ### 2. O overlay no OBS
 
-1. Abra o [`overlay/configure.html`](overlay/configure.html) no navegador (dois cliques nele depois de baixar o repositório).
+1. Abra o [`overlay/configure.html`](overlay/configure.html) no navegador (dois cliques nele na pasta extraída).
 2. Escolha desenho, cores, fontes e idioma; teste uma subida de nível na prévia.
 3. No OBS, adicione uma fonte **Navegador**, deixe **Arquivo local desmarcado**, cole em **URL** o endereço do configurador e use a largura e a altura sugeridas.
 
 ### 3. Diga o seu nível
 
 Abra a tela do personagem (**C**) uma vez no jogo: o nível é lido dela. Daí em diante as subidas são contadas sozinhas (e corrigidas sempre que você abre a tela do personagem de novo). Ou digite `!level 62` no chat.
+
+### Atualizar
+
+Baixe o zip novo e extraia no mesmo lugar, substituindo os arquivos (o endereço no OBS continua valendo), e importe o `D2R-Level-Overlay.sb` novo no Streamer.bot (ele substitui a ação antiga; o nível guardado continua). O [CHANGELOG.md](CHANGELOG.md) lista o que mudou.
 
 ## As texturas do próprio jogo
 
@@ -147,6 +155,7 @@ Ele salva pedaços pequenos da tela (só a área da barra de XP com os botões d
 ```
 python streamerbot/build.py               # checagem de segurança, compilação, gera D2R-Level-Overlay.sb
 python streamerbot/tests/test_reader.py   # o C# de verdade em telas gravadas + as regras de subida
+python tools/make_release.py              # checagens e testes, depois build/D2R-Level-Overlay.zip para um release
 ```
 
 Os detalhes estão no [README em inglês](README.md#for-developers).

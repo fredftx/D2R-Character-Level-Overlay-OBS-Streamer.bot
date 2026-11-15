@@ -144,7 +144,8 @@ def package(code):
                  "websocketServers": [], "websocketClients": [], "timers": []},
         "version": 10, "exportedFrom": "0.2.4", "minimumVersion": "0.2.4-beta.6",
     }
-    raw = b"SBAE" + gzip.compress(json.dumps(data, ensure_ascii=False).encode("utf-8"))
+    # mtime=0: the same code always gives the same file (a release can be checked against its tag)
+    raw = b"SBAE" + gzip.compress(json.dumps(data, ensure_ascii=False).encode("utf-8"), mtime=0)
     return base64.b64encode(raw).decode()
 
 

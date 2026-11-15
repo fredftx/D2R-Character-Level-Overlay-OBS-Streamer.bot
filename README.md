@@ -5,6 +5,8 @@ It reads the game *from the screen*, the same way OBS captures it — no memory 
 
 [Leia em português](README.pt-BR.md)
 
+**[⬇ Download the latest version](https://github.com/fredftx/D2R-Character-Level-Overlay-OBS-Streamer.bot/releases/latest)** (`D2R-Level-Overlay.zip`, under *Assets*) · [what's new](CHANGELOG.md)
+
 ![Diablo II presets: unique, set, magic, rare, life and mana orbs](docs/images/diablo2-presets.jpg)
 
 - Level and XP progress update every second while you play
@@ -67,23 +69,29 @@ A **level up** is counted when the XP bar drops by 30 % or more and stays down o
 
 ## Install
 
+Download **`D2R-Level-Overlay.zip`** from the [latest release](https://github.com/fredftx/D2R-Character-Level-Overlay-OBS-Streamer.bot/releases/latest) and extract it somewhere it will stay, for example into `Documents` (it makes a `D2R-Level-Overlay` folder): OBS loads the overlay from that folder.
+
 ### 1. Streamer.bot
 
 1. **Servers/Clients → WebSocket Server**: enable *Auto Start* and start it (default address `127.0.0.1`, port `8080`).
-2. **Import** (top of the window): paste the content of [`streamerbot/D2R-Level-Overlay.sb`](streamerbot/D2R-Level-Overlay.sb) and import it.
+2. **Import** (top of the window): paste the content of [`streamerbot/D2R-Level-Overlay.sb`](streamerbot/D2R-Level-Overlay.sb) (open it with Notepad) and import it.
    It adds one action, **D2R Level**, and one chat command, **!level**.
 3. **Commands**: Streamer.bot imports commands disabled. Enable **D2R Level !level** if you want it.
 4. Restart Streamer.bot once (or run the action once): the reader starts with Streamer.bot from then on.
 
 ### 2. The overlay in OBS
 
-1. Open [`overlay/configure.html`](overlay/configure.html) in your browser (double-click it after downloading the repository).
+1. Open [`overlay/configure.html`](overlay/configure.html) in your browser (double-click it in the extracted folder).
 2. Pick the layout, colors, fonts and language; test a level up in the preview.
 3. In OBS, add a **Browser** source, leave **Local file unchecked**, paste the address from the configurator into **URL**, and use the suggested width and height.
 
 ### 3. Tell it your level
 
 Open the character screen (**C**) once in game: the level is read from it. From then on level ups are counted automatically (and corrected whenever you open the character screen again). Or type `!level 62` in chat.
+
+### Updating
+
+Download the new zip and extract it to the same place, replacing the files (your OBS address keeps working), then import the new `D2R-Level-Overlay.sb` in Streamer.bot (it replaces the old action; your saved level is kept). [CHANGELOG.md](CHANGELOG.md) lists what changed.
 
 ## The game's own textures
 
@@ -147,6 +155,7 @@ It saves small pieces of the screen (only the XP bar area with the level-up butt
 ```
 python streamerbot/build.py               # safety check, compile check, writes D2R-Level-Overlay.sb
 python streamerbot/tests/test_reader.py   # the real C# on recorded screens + the level-up rules
+python tools/make_release.py              # checks and tests, then build/D2R-Level-Overlay.zip for a release
 ```
 
 - `streamerbot/src/Reader.cs` — the reader and the level-up rules (pure logic, testable)
@@ -154,7 +163,7 @@ python streamerbot/tests/test_reader.py   # the real C# on recorded screens + th
 - `streamerbot/templates/` — the reference pictures (from a 2560 × 1440 screen)
 - `streamerbot/tests/fixtures/` — recorded screen pieces with the expected readings
 - `overlay/` — `index.html` (the overlay), `configure.html` (the configurator), `shared.js` (options, presets, languages), `textures/` (pieces of the game's interface)
-- `tools/` — `record_samples.py` (screen samples for calibration), `make_textures.py` (textures from your screenshots)
+- `tools/` — `record_samples.py` (screen samples for calibration), `make_textures.py` (textures from your screenshots), `make_release.py` (the release zip)
 
 The overlay listens to the Streamer.bot broadcast `{"d2r_level": {"level": 62, "xp": 0.35, "levelUp": false, "running": true}}`, so you can also build your own.
 
